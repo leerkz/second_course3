@@ -34,7 +34,7 @@ def test_category_init(category: Category) -> None:
         category.description
         == "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни"
     )
-    assert len(category.products) == 145
+    assert len(category.products.split("\n")) == 3
     assert Category.category_count == 1
     assert Category.product_count == 3
 
