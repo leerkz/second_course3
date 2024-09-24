@@ -47,7 +47,10 @@ def test_add_product() -> None:
 
 
 def test_price_setter() -> None:
-    product = Product("Laptop", "A gaming laptop", 80000, 10)
+    product = Product("Laptop",
+                      "A gaming laptop",
+                      80000,
+                      10)
     product.price = 90000
     assert product.price == 90000
     product.price = -1000

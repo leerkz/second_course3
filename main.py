@@ -12,7 +12,7 @@ class Product:
     @price.setter
     def price(self, value: float) -> None:
         if value <= 0:
-            print("Цена не должна быть нулевая или отрицательная ")
+            print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = value
 
