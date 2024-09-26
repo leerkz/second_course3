@@ -47,10 +47,7 @@ def test_add_product() -> None:
 
 
 def test_price_setter() -> None:
-    product = Product("Laptop",
-                      "A gaming laptop",
-                      80000,
-                      10)
+    product = Product("Laptop", "A gaming laptop", 80000, 10)
     product.price = 90000
     assert product.price == 90000
     product.price = -1000
@@ -63,6 +60,21 @@ def test_new_product(product: Product) -> None:
     assert product.name == "Laptop"
     assert product.price == 85000
     assert product.quantity == 5
+
+
+def test_product_str() -> None:
+    product = Product("Laptop", "A gaming laptop", 80000, 10)
+    assert str(product) == "Laptop, 80000 руб. Остаток: 10 шт."
+
+
+def test_category_str(category: Category) -> None:
+    assert str(category) == "Смартфоны, количество продуктов: 27 шт."
+
+
+def test_product_addition() -> None:
+    product1 = Product("Laptop", "A gaming laptop", 80000, 10)
+    product2 = Product("Phone", "A smartphone", 20000, 5)
+    assert product1 + product2 == 900000
 
 
 if __name__ == "__main__":

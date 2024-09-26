@@ -25,6 +25,12 @@ class Product:
             quantity=product_data.get("quantity", 0),
         )
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: "Product") -> float:
+        return (self.price * self.quantity) + (other.price * other.quantity)
+
 
 class Category:
     name: str
@@ -47,6 +53,8 @@ class Category:
 
     @property
     def products(self) -> str:
-        return "\n".join(
-            [f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт." for product in self.__products]
-        )
+        return "\n".join([str(product) for product in self.__products])
+
+    def __str__(self) -> str:
+        total_quantity = sum([product.quantity for product in self.__products])
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
