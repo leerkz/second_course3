@@ -1,0 +1,9 @@
+test_main.py ............                                                                                                                                                                                                    [100%]
+
+---------- coverage: platform win32, python 3.12.4-final-0 -----------
+Name           Stmts   Miss  Cover
+----------------------------------
+main.py           63      2    97%
+test_main.py      76      1    99%
+----------------------------------
+TOTAL            139      3    98%
