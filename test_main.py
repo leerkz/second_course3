@@ -1,6 +1,6 @@
 import pytest
 
-from main import Category, Product
+from main import Category, LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
@@ -79,3 +79,37 @@ def test_product_addition() -> None:
 
 if __name__ == "__main__":
     pytest.main()
+
+
+def test_smartphone_creation() -> None:
+    smartphone = Smartphone("iPhone 15", "Последняя модель", 200000, 10, "Высокая", "15 Pro", "512GB", "Серый")
+    assert smartphone.name == "iPhone 15"
+    assert smartphone.model == "15 Pro"
+    assert smartphone.price == 200000
+    assert smartphone.quantity == 10
+    assert smartphone.memory == "512GB"
+    assert smartphone.color == "Серый"
+
+
+def test_lawngrass_creation() -> None:
+    grass = LawnGrass("Газонная трава", "Лучший выбор для газонов", 1000, 50, "Россия", 7, "Зеленый")
+    assert grass.name == "Газонная трава"
+    assert grass.price == 1000
+    assert grass.quantity == 50
+    assert grass.country == "Россия"
+    assert grass.germination_period == 7
+    assert grass.color == "Зеленый"
+
+
+def test_product_addition_type_error() -> None:
+    smartphone = Smartphone("iPhone 15", "Последняя модель", 200000, 10, "Высокая", "15 Pro", "512GB", "Серый")
+    grass = LawnGrass("Газонная трава", "Лучший выбор для газонов", 1000, 50, "Россия", 7, "Зеленый")
+    with pytest.raises(TypeError):
+        smartphone + grass
+
+
+def test_add_product_type_error() -> None:
+    category = Category("Техника", "Категория для техники")
+    invalid_product = "Не продукт"
+    with pytest.raises(TypeError):
+        category.add_product(invalid_product)  # type: ignore[arg-type]
