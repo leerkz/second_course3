@@ -29,6 +29,8 @@ class Product:
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other: "Product") -> float:
+        if type(self) is not type(other):
+            raise TypeError("Нельзя складывать товары разных категорий")
         return (self.price * self.quantity) + (other.price * other.quantity)
 
 
@@ -48,6 +50,8 @@ class Category:
         Category.category_count += 1
 
     def add_product(self, product: Product) -> None:
+        if not isinstance(product, Product):
+            raise TypeError("Можно добавлять только объекты типа Product или его наследников")
         self.__products.append(product)
         Category.product_count += 1
 
@@ -58,3 +62,51 @@ class Category:
     def __str__(self) -> str:
         total_quantity = sum([product.quantity for product in self.__products])
         return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+
+class Smartphone(Product):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: str,
+        model: str,
+        memory: str,
+        color: str,
+    ):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+    def __str__(self) -> str:
+        return (
+            f"{self.name} ({self.model}), {self.price} руб., "
+            f"Остаток: {self.quantity} шт., Цвет: {self.color}, Память: {self.memory}"
+        )
+
+
+class LawnGrass(Product):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: int,
+        color: str,
+    ):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
+
+    def __str__(self) -> str:
+        return (
+            f"{self.name}, {self.price} руб., Остаток: {self.quantity} шт., "
+            f"Страна: {self.country}, Период прорастания: {self.germination_period} дней"
+        )
