@@ -1,6 +1,6 @@
 import pytest
 
-from main import Category, LawnGrass, Product, Smartphone
+from main import BaseProduct, Category, LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
@@ -113,3 +113,22 @@ def test_add_product_type_error() -> None:
     invalid_product = "Не продукт"
     with pytest.raises(TypeError):
         category.add_product(invalid_product)  # type: ignore[arg-type]
+
+
+def test_base_product_instantiation() -> None:
+    with pytest.raises(TypeError):
+        BaseProduct("Product", "Description", 1000, 10)  # type: ignore
+
+
+def test_creation_logger_mixin(capsys: pytest.CaptureFixture) -> None:
+    Product("Laptop", "Gaming Laptop", 80000, 5)
+    captured = capsys.readouterr()
+    assert "Created Product with arguments" in captured.out
+
+
+def test_smartphone_creation_with_mixin(capsys: pytest.CaptureFixture) -> None:
+    Smartphone(
+        "iPhone 15", "Latest model", 200000, 10, "High", "15 Pro", "512GB", "Gray"
+    )  # Создание объекта без присвоения
+    captured = capsys.readouterr()
+    assert "Created Smartphone with arguments" in captured.out
