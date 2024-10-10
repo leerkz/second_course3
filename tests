@@ -1,9 +1,9 @@
-test_main.py ...............                                                                                                                                                                                                 [100%]
+test_main.py ..................                                                                                                                                                                                              [100%]
 
 ---------- coverage: platform win32, python 3.12.4-final-0 -----------
 Name           Stmts   Miss  Cover
 ----------------------------------
-main.py           88      5    94%
-test_main.py      87      1    99%
+main.py           96      5    95%
+test_main.py      95      1    99%
 ----------------------------------
-TOTAL            175      6    97%
+TOTAL            191      6    97%
