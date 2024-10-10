@@ -132,3 +132,17 @@ def test_smartphone_creation_with_mixin(capsys: pytest.CaptureFixture) -> None:
     )  # Создание объекта без присвоения
     captured = capsys.readouterr()
     assert "Created Smartphone with arguments" in captured.out
+
+
+def test_product_zero_quantity_error() -> None:
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Laptop", "A gaming laptop", 80000, 0)
+
+
+def test_average_price_no_products() -> None:
+    category = Category("Electronics", "Various electronic products")
+    assert category.average_price() == 0
+
+
+def test_average_price_with_products(category: Category) -> None:
+    assert category.average_price() == (180000 + 210000 + 31000) / 3

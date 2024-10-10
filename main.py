@@ -39,6 +39,8 @@ class Product(CreationLoggerMixin, BaseProduct):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
     @property
     def price(self) -> float:
@@ -89,6 +91,13 @@ class Category:
             raise TypeError("Можно добавлять только объекты типа Product или его наследников")
         self.__products.append(product)
         Category.product_count += 1
+
+    def average_price(self) -> Any:
+        try:
+            total_price = sum([product.price for product in self.__products])
+            return total_price / len(self.__products)
+        except ZeroDivisionError:
+            return 0
 
     @property
     def products(self) -> str:
