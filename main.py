@@ -1,5 +1,40 @@
-class Product:
+from abc import ABC, abstractmethod
+from typing import Any
+
+
+class BaseProduct(ABC):
+    @abstractmethod
     def __init__(self, name: str, description: str, price: float, quantity: int):
+        self.name = name
+        self.description = description
+        self.__price = price
+        self.quantity = quantity
+
+    @property
+    @abstractmethod
+    def price(self) -> float:
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self, value: float) -> None:
+        pass
+
+    @abstractmethod
+    def __str__(self) -> str:
+        pass
+
+
+class CreationLoggerMixin:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        print(f"Created {self.__class__.__name__} with arguments: {args}, {kwargs}")
+
+
+class Product(CreationLoggerMixin, BaseProduct):
+
+    def __init__(self, name: str, description: str, price: float, quantity: int):
+        super().__init__(name, description, price, quantity)
         self.name = name
         self.description = description
         self.__price = price
